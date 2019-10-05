@@ -1,12 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Number : MonoBehaviour
 {
     // PROPERTIES
     // -------------------------------------------------------------------------
 
-    [SerializeField] private int m_value = 0;
+    [SerializeField] private int m_value;
     [SerializeField] private SpriteRenderer m_numberSpriteRenderer;
     [SerializeField] private Sprite[] m_availableNumberSprites;
 
@@ -15,6 +14,7 @@ public class Number : MonoBehaviour
     
     private void Start()
     {
+        GameController.instance.RegisterNumber(this);
         SetNumberSprite();
     }
 

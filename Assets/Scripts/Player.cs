@@ -6,24 +6,16 @@ public class Player : MonoBehaviour
     // PROPERTIES
     // -------------------------------------------------------------------------
 
-    [SerializeField] private float m_moveSpeed = 5f;
+    [SerializeField] [Range(0.1f, 0.9f)] private float m_moveSpeed = 0.5f;
     [SerializeField] private LayerMask m_wallsLayer;
     
-    private Rigidbody2D m_rigidBody;
     private bool m_isMoving = false;
     private Vector3 m_velocity;
 
 
     // PRIVATE METHODS
     // -------------------------------------------------------------------------
-    
-    // Start is called before the first frame update
-    private void Start()
-    {
-        m_rigidBody = GetComponent<Rigidbody2D>();
-    }
 
-    // Update is called once per frame
     private void Update()
     {
         CheckInput();
@@ -48,27 +40,36 @@ public class Player : MonoBehaviour
 
     private void MoveToward(Vector3 offset)
     {
-        // Check if we can go there.
+        Vector3 destination = transform.position + offset;
+        
+        // Check if there is a number there.
+        if (GameController.instance.IsNumberAtPosition(destination)) {
+            return;
+        }
+        
+        // Check if there is a wall there.
         RaycastHit2D hit = Physics2D.Raycast(transform.position, offset, offset.magnitude, m_wallsLayer);
         if (hit.collider) {
             return;
         }
 
-        StartCoroutine(MoveTo(transform.position + offset));
+        StartCoroutine(MoveTo(destination));
     }
 
     private IEnumerator MoveTo(Vector3 destination)
     {
         m_isMoving = true;
-        m_rigidBody.velocity = (destination - transform.position) * m_moveSpeed;
         float distance;
+        Vector3 direction = (destination - transform.position).normalized;
         
         do {
-            distance = Vector3.Distance(transform.position, destination);
+            Vector3 currentPosition = transform.position;
+            distance = Vector3.Distance(currentPosition, destination);
+            float moveDistance = Mathf.Lerp(0, distance, m_moveSpeed);
+            transform.position = currentPosition + (direction * moveDistance);
             yield return null;
-        } while (distance > 0.1f);
+        } while (distance > 0.15f);
 
-        m_rigidBody.velocity = Vector3.zero;
         transform.position = destination;
         m_isMoving = false;
     }
