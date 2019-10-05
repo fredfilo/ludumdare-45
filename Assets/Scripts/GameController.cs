@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class GameController : MonoBehaviour
     // PROPERTIES
     // -------------------------------------------------------------------------
 
+    public bool isPaused;
+    
     private List<Number> m_numbers = new List<Number>();
     
     // ACCESSORS
@@ -42,6 +45,13 @@ public class GameController : MonoBehaviour
         
         return false;
     }
+
+    public void OnLevelCleared(string nextScene)
+    {
+        // TODO: Scene transition.
+        
+        LoadScene(nextScene);
+    }
     
     // PRIVATE METHODS
     // -------------------------------------------------------------------------
@@ -56,5 +66,24 @@ public class GameController : MonoBehaviour
         if (s_instance != this) {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.R)) {
+            ReloadScene();
+        }
+    }
+
+    private void ReloadScene()
+    {
+        LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    private void LoadScene(string sceneName)
+    {
+        m_numbers = new List<Number>();
+        SceneManager.LoadScene(sceneName);
+        isPaused = false;
     }
 }

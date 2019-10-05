@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-public class Equals : MonoBehaviour
+public class Goal : MonoBehaviour
 {
     // PROPERTIES
     // -------------------------------------------------------------------------
 
+    [SerializeField] private string m_nextScene;
     [SerializeField] private Number m_goalNumber;
     
     // PRIVATE METHODS
@@ -18,7 +19,8 @@ public class Equals : MonoBehaviour
         }
 
         if (player.value == m_goalNumber.value) {
-            Debug.Log("Level Cleared!");
+            GameController.instance.isPaused = true;
+            GameController.instance.OnLevelCleared(m_nextScene);
         }
         else {
             Debug.Log("Incorrect number!");

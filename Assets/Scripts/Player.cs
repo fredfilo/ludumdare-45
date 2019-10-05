@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 
     private void CheckInput()
     {
-        if (m_isMoving) {
+        if (m_isMoving || GameController.instance.isPaused) {
             return;
         }
 
