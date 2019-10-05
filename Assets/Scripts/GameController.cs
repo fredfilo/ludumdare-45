@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public const float FLOAT_COMPARISON_TOLERANCE = 0.0001f;
-        
+
     // STATIC
     // -------------------------------------------------------------------------
 
@@ -16,12 +16,15 @@ public class GameController : MonoBehaviour
 
     public bool isPaused;
     
+    [SerializeField] private SoundsController m_soundsController;
     private List<Number> m_numbers = new List<Number>();
-    
+
     // ACCESSORS
     // -------------------------------------------------------------------------
 
     public static GameController instance => s_instance;
+
+    public SoundsController sounds => m_soundsController;
     
     // PUBLIC METHODS
     // -------------------------------------------------------------------------

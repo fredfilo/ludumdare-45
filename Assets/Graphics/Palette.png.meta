@@ -74,6 +74,18 @@ TextureImporter:
   - first:
       213: 8764711512134712081
     second: grid_border_double
+  - first:
+      213: -6157303252115832531
+    second: ground_01
+  - first:
+      213: 1762373931985314518
+    second: ground_02
+  - first:
+      213: -9217732314119415766
+    second: ground_03
+  - first:
+      213: 4835311857259410015
+    second: goal_arrow
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -661,7 +673,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -669,6 +681,90 @@ TextureImporter:
       bones: []
       spriteID: 5f10d5d52829e453b952739af68f51b5
       internalID: 8764711512134712081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_01
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13165af17090f4207bf2be0ed824002e
+      internalID: -6157303252115832531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_02
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a81018e546cdd43d398eb9e1b88c7d67
+      internalID: 1762373931985314518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_03
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3e918ce766d74950a85be0452bf549c
+      internalID: -9217732314119415766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goal_arrow
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd2d7a9c74eeb46cbb2c8b03084340ed
+      internalID: 4835311857259410015
       vertices: []
       indices: 
       edges: []

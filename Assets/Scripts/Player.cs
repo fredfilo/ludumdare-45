@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -10,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask m_wallsLayer;
     [SerializeField] private SpriteRenderer m_numberSpriteRenderer;
     [SerializeField] private Sprite[] m_availableNumberSprites;
+    [SerializeField] private TextMeshPro m_text;
     
     private int m_value;
     private Operation.Type m_currentOperationType = Operation.Type.NONE;
@@ -112,11 +114,7 @@ public class Player : MonoBehaviour
 
     private void SetNumberSprite()
     {
-        if (m_value < 0 || m_value > m_availableNumberSprites.Length) {
-            return;
-        }
-
-        m_numberSpriteRenderer.sprite = m_availableNumberSprites[m_value];
+        m_text.text = m_value.ToString();
     }
     
     private void OperateNumber(Number number)
@@ -125,6 +123,8 @@ public class Player : MonoBehaviour
             return;
         }
 
+        int valueBefore = m_value;
+        
         switch (m_currentOperationType) {
             case Operation.Type.ADDITION:
                 m_value += number.value;
@@ -138,6 +138,12 @@ public class Player : MonoBehaviour
             case Operation.Type.DIVISION:
                 m_value /= number.value;
                 break;
+        }
+
+        if (m_value > valueBefore) {
+            GameController.instance.sounds.PlayValueIncrement();
+        } else if (m_value < valueBefore) {
+            GameController.instance.sounds.PlayValueDecrement();
         }
         
         SetNumberSprite();

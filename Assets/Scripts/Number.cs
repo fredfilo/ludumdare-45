@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class Number : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class Number : MonoBehaviour
     [SerializeField] private int m_value;
     [SerializeField] private SpriteRenderer m_numberSpriteRenderer;
     [SerializeField] private Sprite[] m_availableNumberSprites;
-
+    [SerializeField] private TextMeshPro m_text;
+    
     // ACCESSORS
     // -------------------------------------------------------------------------
 
@@ -25,11 +27,7 @@ public class Number : MonoBehaviour
 
     private void SetNumberSprite()
     {
-        if (m_value < 0 || m_value > m_availableNumberSprites.Length) {
-            return;
-        }
-
-        m_numberSpriteRenderer.sprite = m_availableNumberSprites[m_value];
+        m_text.text = m_value.ToString();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
