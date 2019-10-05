@@ -46,11 +46,11 @@ public class GameController : MonoBehaviour
         return false;
     }
 
-    public void OnLevelCleared(string nextScene)
+    public void OnLevelCleared()
     {
         // TODO: Scene transition.
         
-        LoadScene(nextScene);
+        LoadNextScene();
     }
     
     // PRIVATE METHODS
@@ -80,10 +80,22 @@ public class GameController : MonoBehaviour
         LoadScene(SceneManager.GetActiveScene().name);
     }
     
+    private void LoadNextScene()
+    {
+        LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    
     private void LoadScene(string sceneName)
     {
         m_numbers = new List<Number>();
         SceneManager.LoadScene(sceneName);
+        isPaused = false;
+    }
+    
+    private void LoadScene(int sceneIndex)
+    {
+        m_numbers = new List<Number>();
+        SceneManager.LoadScene(sceneIndex);
         isPaused = false;
     }
 }

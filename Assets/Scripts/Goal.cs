@@ -5,9 +5,8 @@ public class Goal : MonoBehaviour
     // PROPERTIES
     // -------------------------------------------------------------------------
 
-    [SerializeField] private string m_nextScene;
     [SerializeField] private Number m_goalNumber;
-    
+
     // PRIVATE METHODS
     // -------------------------------------------------------------------------
 
@@ -20,7 +19,7 @@ public class Goal : MonoBehaviour
 
         if (player.value == m_goalNumber.value) {
             GameController.instance.isPaused = true;
-            GameController.instance.OnLevelCleared(m_nextScene);
+            GameController.instance.OnLevelCleared();
         }
         else {
             Debug.Log("Incorrect number!");

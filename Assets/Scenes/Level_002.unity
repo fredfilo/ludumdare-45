@@ -925,7 +925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5d83a46246f843a594bfa00dd70bdd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_type: 1
+  m_type: 2
   m_spriteRenderer: {fileID: 444966726}
   m_additionSprite: {fileID: 7899475724529807290, guid: 9755ff0cf217941e89c90f8ff1b93a36,
     type: 3}
@@ -1020,7 +1020,7 @@ PrefabInstance:
     - target: {fileID: 1490735095884566484, guid: 67c052d3a478b4f0fa68e29071c86c0b,
         type: 3}
       propertyPath: m_value
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67c052d3a478b4f0fa68e29071c86c0b, type: 3}
@@ -1541,7 +1541,7 @@ PrefabInstance:
     - target: {fileID: 1490735095884566484, guid: 67c052d3a478b4f0fa68e29071c86c0b,
         type: 3}
       propertyPath: m_value
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67c052d3a478b4f0fa68e29071c86c0b, type: 3}
@@ -2729,6 +2729,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1490735095884566484, guid: 67c052d3a478b4f0fa68e29071c86c0b,
+        type: 3}
+      propertyPath: m_value
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67c052d3a478b4f0fa68e29071c86c0b, type: 3}
 --- !u!1001 &3296818400923488830
@@ -2866,6 +2871,15 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184939353302230676, guid: d6f1a0e55d82746dd9285fd426347854,
+        type: 3}
+      propertyPath: m_value
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124411875, guid: d6f1a0e55d82746dd9285fd426347854, type: 3}
+      propertyPath: m_nextScene
+      value: Level_001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6f1a0e55d82746dd9285fd426347854, type: 3}

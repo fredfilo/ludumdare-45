@@ -1209,7 +1209,7 @@ Tilemap:
   - m_RefCount: 24
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_Origin: {x: -6, y: -4, z: 0}
   m_Size: {x: 11, y: 7, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -1657,15 +1657,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1352694424862269937, guid: d6f1a0e55d82746dd9285fd426347854,
-        type: 3}
+    - target: {fileID: 1124411875, guid: d6f1a0e55d82746dd9285fd426347854, type: 3}
       propertyPath: m_nextScene
-      value: SampleScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 9184939353302230676, guid: d6f1a0e55d82746dd9285fd426347854,
-        type: 3}
-      propertyPath: m_value
-      value: 0
+      value: Level_002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6f1a0e55d82746dd9285fd426347854, type: 3}
