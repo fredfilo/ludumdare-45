@@ -71,6 +71,9 @@ TextureImporter:
   - first:
       213: -215680430168636894
     second: grid_corner_in_2
+  - first:
+      213: 8764711512134712081
+    second: grid_border_double
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -637,7 +640,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -645,6 +648,27 @@ TextureImporter:
       bones: []
       spriteID: e92c13c684b2e4d788039c4de77725c1
       internalID: -215680430168636894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grid_border_double
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 288
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f10d5d52829e453b952739af68f51b5
+      internalID: 8764711512134712081
       vertices: []
       indices: 
       edges: []

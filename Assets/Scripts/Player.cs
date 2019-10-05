@@ -8,14 +8,30 @@ public class Player : MonoBehaviour
 
     [SerializeField] [Range(0.1f, 0.9f)] private float m_moveSpeed = 0.5f;
     [SerializeField] private LayerMask m_wallsLayer;
+    [SerializeField] private SpriteRenderer m_numberSpriteRenderer;
+    [SerializeField] private Sprite[] m_availableNumberSprites;
     
+    private int m_value;
+    private Operation.Type m_currentOperationType = Operation.Type.NONE;
     private bool m_isMoving = false;
     private Vector3 m_velocity;
+    private Operation m_operation;
 
+    // ACCESSORS
+    // -------------------------------------------------------------------------
+    
+    public int value => m_value;
+    
+    public bool hasOperation => (m_currentOperationType != Operation.Type.NONE);
 
     // PRIVATE METHODS
     // -------------------------------------------------------------------------
 
+    private void Start()
+    {
+        SetNumberSprite();
+    }
+    
     private void Update()
     {
         CheckInput();
@@ -43,7 +59,7 @@ public class Player : MonoBehaviour
         Vector3 destination = transform.position + offset;
         
         // Check if there is a number there.
-        if (GameController.instance.IsNumberAtPosition(destination)) {
+        if (!hasOperation && GameController.instance.IsNumberAtPosition(destination)) {
             return;
         }
         
@@ -72,5 +88,58 @@ public class Player : MonoBehaviour
 
         transform.position = destination;
         m_isMoving = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Number number = other.GetComponent<Number>();
+        if (number) {
+            Debug.Log("Hit number: " + number.value);
+            if (hasOperation) {
+                OperateNumber(number);
+                Destroy(other.gameObject);
+            }
+            return;
+        }
+        
+        Operation operation = other.GetComponent<Operation>();
+        if (operation) {
+            Debug.Log("Set operation: " + operation.type);
+            m_currentOperationType = operation.type;
+            Destroy(other.gameObject);
+        }
+    }
+
+    private void SetNumberSprite()
+    {
+        if (m_value < 0 || m_value > m_availableNumberSprites.Length) {
+            return;
+        }
+
+        m_numberSpriteRenderer.sprite = m_availableNumberSprites[m_value];
+    }
+    
+    private void OperateNumber(Number number)
+    {
+        if (!hasOperation) {
+            return;
+        }
+
+        switch (m_currentOperationType) {
+            case Operation.Type.ADDITION:
+                m_value += number.value;
+                break;
+            case Operation.Type.SUBTRACTION:
+                m_value -= number.value;
+                break;
+            case Operation.Type.MULTIPLICATION:
+                m_value *= number.value;
+                break;
+            case Operation.Type.DIVISION:
+                m_value /= number.value;
+                break;
+        }
+        
+        SetNumberSprite();
     }
 }

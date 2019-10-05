@@ -9,6 +9,11 @@ public class Number : MonoBehaviour
     [SerializeField] private SpriteRenderer m_numberSpriteRenderer;
     [SerializeField] private Sprite[] m_availableNumberSprites;
 
+    // ACCESSORS
+    // -------------------------------------------------------------------------
+
+    public int value => m_value;
+    
     // PRIVATE METHODS
     // -------------------------------------------------------------------------
     
