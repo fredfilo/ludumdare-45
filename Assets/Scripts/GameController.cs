@@ -1,18 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // STATIC
+    // -------------------------------------------------------------------------
 
-    // Update is called once per frame
-    void Update()
+    private static GameController s_instance;
+    
+    // ACCESSORS
+    // -------------------------------------------------------------------------
+
+    public static GameController instance => s_instance;
+    
+    // PRIVATE METHODS
+    // -------------------------------------------------------------------------
+
+    private void Awake()
     {
-        
+        if (s_instance == null) {
+            s_instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        if (s_instance != this) {
+            Destroy(gameObject);
+        }
     }
 }
