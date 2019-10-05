@@ -1,0 +1,38 @@
+﻿using System;
+using UnityEngine;
+
+public class Number : MonoBehaviour
+{
+    // PROPERTIES
+    // -------------------------------------------------------------------------
+
+    [SerializeField] private int m_value = 0;
+    [SerializeField] private SpriteRenderer m_numberSpriteRenderer;
+    [SerializeField] private Sprite[] m_availableNumberSprites;
+
+    // PRIVATE METHODS
+    // -------------------------------------------------------------------------
+    
+    private void Start()
+    {
+        SetNumberSprite();
+    }
+
+    private void SetNumberSprite()
+    {
+        if (m_value < 0 || m_value > m_availableNumberSprites.Length) {
+            return;
+        }
+
+        m_numberSpriteRenderer.sprite = m_availableNumberSprites[m_value];
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player")) {
+            return;
+        }
+
+        Destroy(gameObject);
+    }
+}
