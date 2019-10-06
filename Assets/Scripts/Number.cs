@@ -22,12 +22,7 @@ public class Number : MonoBehaviour
     private void Start()
     {
         GameController.instance.RegisterNumber(this);
-        SetNumberSprite();
-    }
-
-    private void SetNumberSprite()
-    {
-        m_text.text = m_value.ToString();
+        m_value = int.Parse(m_text.text);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

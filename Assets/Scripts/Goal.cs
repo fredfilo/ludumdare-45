@@ -18,7 +18,6 @@ public class Goal : MonoBehaviour
         }
 
         if (player.value == m_goalNumber.value) {
-            GameController.instance.isPaused = true;
             GameController.instance.sounds.PlayLevelCleared();
             GameController.instance.OnLevelCleared();
         }

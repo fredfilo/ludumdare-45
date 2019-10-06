@@ -15,13 +15,7 @@ public class Operation : MonoBehaviour
     // -------------------------------------------------------------------------
 
     [SerializeField] private Type m_type;
-    [SerializeField] private SpriteRenderer m_spriteRenderer;
-    
-    [SerializeField] private Sprite m_additionSprite;
-    [SerializeField] private Sprite m_subtractionSprite;
-    [SerializeField] private Sprite m_multiplicationSprite;
-    [SerializeField] private Sprite m_divisionSprite;
-    
+
     // ACCESSORS
     // -------------------------------------------------------------------------
 
@@ -44,35 +38,5 @@ public class Operation : MonoBehaviour
             default:
                 return leftNumber;
         }
-    }
-    
-    // PRIVATE METHODS
-    // -------------------------------------------------------------------------
-    
-    private void Start()
-    {
-        SetSprite();
-    }
-
-    private void SetSprite()
-    {
-        Sprite sprite = null;
-        
-        switch (m_type) {
-            case Type.ADDITION:
-                sprite = m_additionSprite;
-                break;
-            case Type.SUBTRACTION:
-                sprite = m_subtractionSprite;
-                break;
-            case Type.MULTIPLICATION:
-                sprite = m_multiplicationSprite;
-                break;
-            case Type.DIVISION:
-                sprite = m_divisionSprite;
-                break;
-        }
-
-        m_spriteRenderer.sprite = sprite;
     }
 }

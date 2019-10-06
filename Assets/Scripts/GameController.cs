@@ -52,8 +52,8 @@ public class GameController : MonoBehaviour
     public void OnLevelCleared()
     {
         // TODO: Scene transition.
-        
-        LoadNextScene();
+        isPaused = true;
+        Invoke(nameof(LoadNextScene), 1f);
     }
     
     // PRIVATE METHODS
