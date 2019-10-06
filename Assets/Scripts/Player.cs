@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, INotificationListener
 {
     // PROPERTIES
     // -------------------------------------------------------------------------
@@ -15,12 +16,14 @@ public class Player : MonoBehaviour
 
     [Header("Face Sprites")]
     
+    [SerializeField] private bool m_hasFixedFace = false;
     [SerializeField] private Sprite m_spriteFace0;
     [SerializeField] private Sprite m_spriteFace25;
     [SerializeField] private Sprite m_spriteFace50;
     [SerializeField] private Sprite m_spriteFace75;
     [SerializeField] private Sprite m_spriteFace100;
     [SerializeField] private Sprite m_spriteFaceRejected;
+    [SerializeField] private Sprite m_spriteFaceSad;
     
     [Header("Face Sprites")]
     
@@ -39,17 +42,38 @@ public class Player : MonoBehaviour
 
     public float fillPercent => m_fillPercent;
 
+    // PUBLIC METHODS
+    // -------------------------------------------------------------------------
+    
+    public void OnNotification(Notification notification)
+    {
+        switch (notification.type) {
+            case Notification.Type.POTION_BLOCKED:
+                m_faceSpriteRenderer.sprite = m_spriteFaceSad;
+                break;
+        }
+    }
+    
     // PRIVATE METHODS
     // -------------------------------------------------------------------------
 
     private void Start()
     {
-        SetSprites();
+        GameController.instance.notifications.Subscribe(Notification.Type.POTION_BLOCKED, this);
+
+        if (!m_hasFixedFace) {
+            SetSprites();
+        }
     }
 
     private void Update()
     {
         CheckInput();
+    }
+
+    private void OnDestroy()
+    {
+        GameController.instance.notifications.Unsubscribe(Notification.Type.POTION_BLOCKED, this);
     }
 
     private void CheckInput()
@@ -86,8 +110,10 @@ public class Player : MonoBehaviour
         }
         
         if (hit.collider.CompareTag("Exit")) {
-            if (m_fillPercent > 0.9f) {
+            Exit exit = hit.collider.GetComponent<Exit>();
+            if (m_fillPercent >= exit.requiredLevel) {
                 GameController.instance.notifications.Notify(new LevelClearedNotification());
+                StartCoroutine(MoveTo(destination));
             }
             else {
                 GameController.instance.sounds.PlayRejected();
@@ -98,7 +124,7 @@ public class Player : MonoBehaviour
 
         if (hit.collider.CompareTag("Rock")) {
             Rock rock = hit.collider.GetComponent<Rock>();
-            if (rock.Push(offset)) {
+            if (rock.Push(offset, gameObject)) {
                 StartCoroutine(MoveTo(destination));
             }
         }

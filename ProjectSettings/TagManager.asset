@@ -52,3 +52,12 @@ TagManager:
   - name: Particles
     uniqueID: 780453537
     locked: 0
+  - name: Player
+    uniqueID: 2326917569
+    locked: 0
+  - name: Rocks
+    uniqueID: 2920837027
+    locked: 0
+  - name: Potions
+    uniqueID: 935982807
+    locked: 0

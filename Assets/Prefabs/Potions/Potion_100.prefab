@@ -49,6 +49,9 @@ MonoBehaviour:
   m_spriteRenderer: {fileID: 5376224832866709464}
   m_emptySprite: {fileID: -2466789373252015564, guid: 91a7a8d4674034a3da38cb8f9efe3c10,
     type: 3}
+  m_wallsLayer:
+    serializedVersion: 2
+    m_Bits: 8448
 --- !u!212 &5376224832866709464
 SpriteRenderer:
   m_ObjectHideFlags: 0

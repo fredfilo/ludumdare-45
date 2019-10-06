@@ -5,10 +5,10 @@ public class Exit : MonoBehaviour
     // PROPERTIES
     // -------------------------------------------------------------------------
 
-    [SerializeField] private string m_nextSceneName;
-    
+    [SerializeField] private float m_requiredLevel = 1f;
+
     // ACCESSORS
     // -------------------------------------------------------------------------
 
-    public string nextSceneName => m_nextSceneName;
+    public float requiredLevel => m_requiredLevel;
 }

@@ -228,6 +228,8 @@ MonoBehaviour:
     type: 3}
   m_spriteFaceRejected: {fileID: 4973577898279272786, guid: 91a7a8d4674034a3da38cb8f9efe3c10,
     type: 3}
+  m_spriteFaceSad: {fileID: 2365905461245354860, guid: 91a7a8d4674034a3da38cb8f9efe3c10,
+    type: 3}
   m_spriteBody0: {fileID: 4004394502486728938, guid: 91a7a8d4674034a3da38cb8f9efe3c10,
     type: 3}
   m_spriteBody25: {fileID: -8238207311930925460, guid: 91a7a8d4674034a3da38cb8f9efe3c10,

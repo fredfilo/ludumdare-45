@@ -9,11 +9,15 @@ public class ScenesController : MonoBehaviour
 
     private string s_menuSceneName = "Menu";
     
-    private string s_endSceneName = "Tutorial_01";
+    private string s_endSceneName = "End";
     
-    private static string[] s_scenes = new[] {
+    private static string[] s_scenes = {
         "Tutorial_01",
-        "Tutorial_02"
+        "Tutorial_02",
+        "Tutorial_03",
+        "Tutorial_04",
+        "Tutorial_05",
+        "Level_01",
     };
     
     // PROPERTIES
@@ -27,7 +31,14 @@ public class ScenesController : MonoBehaviour
     // ACCESSORS
     // -------------------------------------------------------------------------
 
-    public bool currentSceneIsLevel => m_currentSceneIsLevel;
+    public bool currentSceneIsLevel
+    {
+        get {
+            string currentSceneName = SceneManager.GetActiveScene().name;
+
+            return currentSceneName != s_menuSceneName && currentSceneName != s_endSceneName;
+        }
+    }
     
     // PUBLIC METHODS
     // -------------------------------------------------------------------------
@@ -48,14 +59,20 @@ public class ScenesController : MonoBehaviour
         Invoke(nameof(StartTransitionToNextScene), delay);
     }
     
+    public void StartTransitionToFirstScene()
+    {
+        m_currentSceneIndex = 0;
+        m_nextSceneName = s_scenes[m_currentSceneIndex];
+        
+        StartCoroutine(HideScene());
+    }
+    
     public void StartTransitionToNextScene()
     {
         if (m_currentSceneIndex >= s_scenes.Length - 1) {
-            m_currentSceneIsLevel = false;
             m_nextSceneName = s_endSceneName;
         }
         else {
-            m_currentSceneIsLevel = true;
             m_currentSceneIndex++;
             m_nextSceneName = s_scenes[m_currentSceneIndex];
         }
