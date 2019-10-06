@@ -7,7 +7,7 @@ public class ScenesController : MonoBehaviour
     // STATIC
     // -------------------------------------------------------------------------
 
-    private string s_menuSceneName = "Menu";
+    private string s_menuSceneName = "Start";
     
     private string s_endSceneName = "End";
     
@@ -18,6 +18,8 @@ public class ScenesController : MonoBehaviour
         "Tutorial_04",
         "Tutorial_05",
         "Level_01",
+        "Level_02",
+        "Level_03"
     };
     
     // PROPERTIES

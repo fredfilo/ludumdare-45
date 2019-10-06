@@ -15,6 +15,7 @@ public class Rock : MonoBehaviour
 
     [SerializeField] private Rock[] m_linkedRocks;
     [SerializeField] private GameObject m_linkSprite;
+    [SerializeField] private Color m_linkColor = new Color(0, 0, 0, 1f);
     
     // ACCESSORS
     // -------------------------------------------------------------------------
@@ -55,6 +56,16 @@ public class Rock : MonoBehaviour
     {
         return Move(direction, by);
     }
+
+    public void SetLinkIconActive()
+    {
+        m_linkSprite.SetActive(true);
+    }
+
+    public void SetLinkColor(Color color)
+    {
+        m_linkSprite.GetComponent<SpriteRenderer>().color = color;
+    }
     
     // PRIVATE METHODS
     // -------------------------------------------------------------------------
@@ -62,7 +73,12 @@ public class Rock : MonoBehaviour
     private void Start()
     {
         if (m_linkedRocks.Length > 0) {
-            m_linkSprite.SetActive(true);
+            SetLinkIconActive();
+            SetLinkColor(m_linkColor);
+            foreach (Rock linkedRock in m_linkedRocks) {
+                linkedRock.SetLinkIconActive();
+                linkedRock.SetLinkColor(m_linkColor);
+            }
         }
     }
 

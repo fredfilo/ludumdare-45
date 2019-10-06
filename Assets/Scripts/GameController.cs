@@ -32,16 +32,6 @@ public class GameController : MonoBehaviour, INotificationListener
     // PUBLIC METHODS
     // -------------------------------------------------------------------------
     
-    public void OnSceneRevealed()
-    {
-        isPaused = false;
-    }
-
-    public void ShowHowToRestartLevel()
-    {
-        Debug.Log("PRESS R TO RESTART THE LEVEL");
-    }
-    
     public void OnNotification(Notification notification)
     {
         switch (notification.type) {

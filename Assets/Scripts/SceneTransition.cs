@@ -21,13 +21,11 @@ public class SceneTransition : MonoBehaviour
 
     public void HideScene()
     {
-        Debug.Log("Hide Scene");
         m_animator.SetTrigger(AnimatorKeyHide);
     }
     
     public void RevealScene()
     {
-        Debug.Log("Reveal Scene");
         m_animator.SetTrigger(AnimatorKeyReveal);
     }
 

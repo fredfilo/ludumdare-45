@@ -11,6 +11,11 @@ public class UI : MonoBehaviour
     // PUBLIC METHODS
     // -------------------------------------------------------------------------
 
+    public void OnStartButton()
+    {
+        GameController.instance.scenes.StartTransitionToFirstScene();
+    }
+    
     public void OnQuitButton()
     {
         Application.Quit();
@@ -18,7 +23,6 @@ public class UI : MonoBehaviour
 
     public void OnRestartGameButton()
     {
-        Debug.Log("Restart");
         GameController.instance.scenes.StartTransitionToFirstScene();
     }
     

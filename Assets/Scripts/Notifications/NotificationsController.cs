@@ -37,7 +37,6 @@ public class NotificationsController
 
     public void Notify(Notification notification)
     {
-        Debug.Log("Notifying " + notification.type);
         if (!m_types.ContainsKey(notification.type)) {
             return;
         }
