@@ -33,12 +33,12 @@ public class SceneTransition : MonoBehaviour
 
     public void OnSceneHidden()
     {
-        GameController.instance.OnSceneHidden();
+        GameController.instance.notifications.Notify(new SceneHiddenNotification());
     }
     
     public void OnSceneRevealed()
     {
-        GameController.instance.OnSceneRevealed();
+        GameController.instance.notifications.Notify(new SceneRevealedNotification());
     }
     
     // PRIVATE METHODS
@@ -48,6 +48,6 @@ public class SceneTransition : MonoBehaviour
     {
         m_animator = GetComponent<Animator>();
         
-        GameController.instance.RegisterSceneTransition(this);
+        GameController.instance.scenes.RegisterSceneTransition(this);
     }
 }

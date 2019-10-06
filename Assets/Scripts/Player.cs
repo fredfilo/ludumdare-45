@@ -87,8 +87,7 @@ public class Player : MonoBehaviour
         
         if (hit.collider.CompareTag("Exit")) {
             if (m_fillPercent > 0.9f) {
-                Exit exit = hit.collider.GetComponent<Exit>();
-                GameController.instance.OnLevelCleared(exit.nextSceneName);
+                GameController.instance.notifications.Notify(new LevelClearedNotification());
             }
             else {
                 GameController.instance.sounds.PlayRejected();

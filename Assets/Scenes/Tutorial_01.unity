@@ -1663,11 +1663,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1115641425630767874, guid: 4105b32ca82d44e50924bfb5246b07d0,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4105b32ca82d44e50924bfb5246b07d0, type: 3}
 --- !u!1001 &3296818400923488830

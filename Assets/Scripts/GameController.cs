@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameController : MonoBehaviour, INotificationListener
 {
     public const float FLOAT_COMPARISON_TOLERANCE = 0.0001f;
 
@@ -11,66 +8,29 @@ public class GameController : MonoBehaviour
     // -------------------------------------------------------------------------
 
     private static GameController s_instance;
-    
+
     // PROPERTIES
     // -------------------------------------------------------------------------
 
-    public bool isPaused;
+    public bool isPaused = true;
     
-    [SerializeField] private SoundsController m_soundsController;
-    private List<Number> m_numbers = new List<Number>();
-    private SceneTransition m_sceneTransition;
-    private string m_nextSceneName;
+    [SerializeField] private SoundsController m_sounds;
+    [SerializeField] private ScenesController m_scenes;
+    private NotificationsController m_notifications;
 
     // ACCESSORS
     // -------------------------------------------------------------------------
 
     public static GameController instance => s_instance;
 
-    public SoundsController sounds => m_soundsController;
+    public SoundsController sounds => m_sounds;
+
+    public ScenesController scenes => m_scenes;
+
+    public NotificationsController notifications => m_notifications;
     
     // PUBLIC METHODS
     // -------------------------------------------------------------------------
-
-    public void RegisterNumber(Number number)
-    {
-        if (m_numbers.Contains(number)) {
-            return;
-        }
-        
-        m_numbers.Add(number);
-    }
-
-    public void RegisterSceneTransition(SceneTransition sceneTransition)
-    {
-        m_sceneTransition = sceneTransition;
-        m_sceneTransition.RevealScene();
-    }
-    
-    public bool IsNumberAtPosition(Vector3 position)
-    {
-        foreach (Number number in m_numbers) {
-            if (Vector3.Distance(position, number.transform.position) < 0.25f) {
-                return true;
-            }
-        }
-        
-        return false;
-    }
-
-    public void OnLevelCleared(string nextSceneName)
-    {
-        isPaused = true;
-        m_soundsController.PlayLevelCleared();
-        m_nextSceneName = nextSceneName;
-        
-        Invoke(nameof(LoadNextScene), 1f);
-    }
-
-    public void OnSceneHidden()
-    {
-        LoadScene(m_nextSceneName);
-    }
     
     public void OnSceneRevealed()
     {
@@ -82,6 +42,23 @@ public class GameController : MonoBehaviour
         Debug.Log("PRESS R TO RESTART THE LEVEL");
     }
     
+    public void OnNotification(Notification notification)
+    {
+        switch (notification.type) {
+            case Notification.Type.LEVEL_CLEARED:
+                isPaused = true;
+                m_sounds.PlayLevelCleared();
+                m_scenes.StartTransitionToNextSceneWithDelay(1f);
+                break;
+            case Notification.Type.SCENE_REVEAL_COMPLETE:
+                isPaused = false;
+                break;
+            case Notification.Type.SCENE_HIDE_COMPLETE:
+                m_scenes.LoadNextScene();
+                break;
+        }
+    }
+    
     // PRIVATE METHODS
     // -------------------------------------------------------------------------
 
@@ -89,6 +66,11 @@ public class GameController : MonoBehaviour
     {
         if (s_instance == null) {
             s_instance = this;
+            m_notifications = new NotificationsController();
+            m_notifications.Subscribe(Notification.Type.LEVEL_CLEARED, this);
+            m_notifications.Subscribe(Notification.Type.SCENE_REVEAL_COMPLETE, this);
+            m_notifications.Subscribe(Notification.Type.SCENE_HIDE_COMPLETE, this);
+            
             DontDestroyOnLoad(gameObject);
         }
 
@@ -97,46 +79,10 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        Debug.Log("GameController Start");
-    }
-
     private void Update()
     {
-        if (Input.GetKey(KeyCode.R)) {
-            ReloadScene();
+        if (Input.GetKey(KeyCode.R) && m_scenes.currentSceneIsLevel) {
+            m_scenes.ReloadScene();
         }
-    }
-    
-    private IEnumerator HideScene()
-    {
-        isPaused = true;
-        
-        if (!m_sceneTransition) {
-            yield return new WaitForSeconds(0.1f);
-        }
-        
-        m_sceneTransition.HideScene();
-    }
-    
-    private void ReloadScene()
-    {
-        m_nextSceneName = SceneManager.GetActiveScene().name;
-        StartCoroutine(HideScene());
-    }
-    
-    private void LoadNextScene()
-    {
-        Debug.Log("Scenes count = " + SceneManager.sceneCount);
-//        m_nextSceneName = SceneManager.GetSceneAt(SceneManager.GetActiveScene().buildIndex + 1).name;
-        Debug.Log("next scene name = " + m_nextSceneName);
-        StartCoroutine(HideScene());
-    }
-    
-    private void LoadScene(string sceneName)
-    {
-        m_numbers = new List<Number>();
-        SceneManager.LoadScene(sceneName);
     }
 }
